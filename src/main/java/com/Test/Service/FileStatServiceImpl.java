@@ -39,18 +39,18 @@ public class FileStatServiceImpl implements FileStatService {
         FileStat fileStat = null;
         try(Stream<String> linesStream = Files.lines(Paths.get(file.getPath()))){
 
-            List<String> linesList = linesStream.collect(Collectors.toList());
+            List<String> linesList = linesStream.filter(str -> str.length()>0).collect(Collectors.toList());
 
             int countLine = linesList.size();
 
             double sum = 0;
             for (String str: linesList) {
-                sum += str.split(" ").length;
+                sum += str.split(" +").length;
             }
 
             double avgWordInLines = sum/countLine;
 
-            List<String> wordList = Arrays.asList(linesList.stream().collect(Collectors.joining(" ")).split(" "));
+            List<String> wordList = Arrays.asList(linesList.stream().collect(Collectors.joining(" ")).split(" +"));
 
             int maxWord = wordList.stream().max(Comparator.comparingInt(String::length)).get().length();
             int minWord = wordList.stream().min(Comparator.comparingInt(String::length)).get().length();
