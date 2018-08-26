@@ -39,7 +39,7 @@ public class FileStatServiceImpl implements FileStatService {
         FileStat fileStat = null;
         try(Stream<String> linesStream = Files.lines(Paths.get(file.getPath()))){
 
-            List<String> linesList = linesStream.filter(str -> str.length()>0).collect(Collectors.toList());
+            List<String> linesList = linesStream.collect(Collectors.toList());
 
             int countLine = linesList.size();
 
