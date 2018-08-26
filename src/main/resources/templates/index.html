@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/Style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/upload">
+        <label for="file" class="input-label">
+            <i class="fas fa-upload"></i>
+            <span id="label_span">Выбрать файл</span>
+        </label>
+        <input type="file" id="file" name="file" accept=".txt">
+        <br />
+        <input class="buttons" id="load_file_button" type="submit" value="Загрузить" disabled >
+    </form>
+
+    <form>
+        <input id="filename_list_input" list="filename_list" placeholder="Введите имя файла...">
+        <datalist id="filename_list">
+
+        </datalist>
+    </form>
+
+
+    <button id="show_table_button" class="buttons">Показать таблицу</button>
+    <table id="data_table">
+        <tr>
+            <th>Имя файла</th>
+            <th>Кол-во строк</th>
+            <th>Ср. кол. слов в строке</th>
+            <th>Символов в самом длином слове</th>
+            <th>Символов в самом коротком слове</th>
+        </tr>
+    </table>
+</div>
+<script src="../static/js/fileButton.js"></script>
+<script src="../static/js/createTable.js"></script>
+<script src="../static/js/searchFile.js"></script>
+</body>
+</html>
