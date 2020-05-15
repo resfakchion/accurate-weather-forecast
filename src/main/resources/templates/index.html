@@ -1,45 +1,671 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Main page</title>
-    <link type="text/css" rel="stylesheet" media="all" href="../static/css/Style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Прогноз погоды </title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/fav-icon.ico">
+  <link rel="stylesheet" type="text/css" href="js/bootstrap/bootstrap.min.css">
+
+  <!-- Google fonts  -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
+
+  <!-- Template's stylesheets -->
+  <link rel="stylesheet" href="js/megamenu/stylesheets/screen.css">
+  <link rel="stylesheet" href="css/theme-default.css" type="text/css">
+  <link rel="stylesheet" href="js/loaders/stylesheets/screen.css">
+  <link rel="stylesheet" href="css/corporate.css" type="text/css">
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="fonts/Simple-Line-Icons-Webfont/simple-line-icons.css" media="screen" />
+  <link rel="stylesheet" href="fonts/et-line-font/et-line-font.css">
+  <link rel="stylesheet" type="text/css" href="js/revolution-slider/css/settings.css">
+  <link rel="stylesheet" type="text/css" href="js/revolution-slider/css/layers.css">
+  <link rel="stylesheet" type="text/css" href="js/revolution-slider/css/navigation.css">
+  <link rel="stylesheet" href="js/parallax/main.css">
+  <link rel="stylesheet" type="text/css" href="js/cubeportfolio/cubeportfolio.min.css">
+  <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+  <link href="js/owl-carousel/owl.theme.css" rel="stylesheet">
+  <link href="js/tabs/css/responsive-tabs.css" rel="stylesheet" type="text/css" media="all" />
+  <link rel="stylesheet" href="js/ytplayer/ytplayer.css" />
+  <link href="js/accordion/css/smk-accordion.css" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+  <!-- Template's stylesheets END -->
+
+  <!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+  <!-- Style Customizer's stylesheets -->
+
+  <link rel="stylesheet/less" type="text/css" href="less/skin.less">
+  <!-- Style Customizer's stylesheets END -->
+
+  <!-- Skin stylesheet -->
+
 </head>
+
 <body>
-<div>
-    <form method="POST" enctype="multipart/form-data" action="/upload">
-        <label for="file" class="input-label">
-            <i class="fas fa-upload"></i>
-            <span id="label_span">Выбрать файл</span>
-        </label>
-        <input type="file" id="file" name="file" accept=".txt">
-        <br />
-        <input class="buttons" id="load_file_button" type="submit" value="Загрузить" disabled >
-    </form>
+  <div class="over-loader loader-live">
+    <div class="loader">
+      <div class="loader-item style5">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
 
-    <form>
-        <input id="filename_list_input" list="filename_list" placeholder="Введите имя файла...">
-        <datalist id="filename_list">
-
-        </datalist>
-    </form>
+    </div>
+  </div>
+  <!--end loading-->
 
 
-    <button id="show_table_button" class="buttons">Показать таблицу</button>
-    <table id="data_table">
-        <tr>
-            <th>Имя файла</th>
-            <th>Кол-во строк</th>
-            <th>Ср. кол. слов в строке</th>
-            <th>Символов в самом длином слове</th>
-            <th>Символов в самом коротком слове</th>
-        </tr>
-    </table>
-</div>
-<script src="../static/js/fileButton.js"></script>
-<script src="../static/js/createTable.js"></script>
-<script src="../static/js/searchFile.js"></script>
+
+  <div class="wrapper-boxed">
+    <div class="site-wrapper">
+      <div class="col-md-12 nopadding">
+        <div class="header-section white dark-dropdowns style1 links-dark pin-style">
+          <div class="container">
+            <div class="mod-menu">
+              <div class="row">
+                <div class="col-sm-2"> <a href="index.html" title="" class="logo mar-4"> <img
+                      src="images/logo/logoGZ.png" alt=""> </a> </div>
+                <div class="col-sm-10">
+                  <div class="main-nav">
+                    <ul class="nav navbar-nav top-nav">
+                      <li class="visible-xs menu-icon"> <a href="javascript:void(0)" class="navbar-toggle collapsed"
+                          data-toggle="collapse" data-target="#menu" aria-expanded="false"> <i aria-hidden="true"
+                            class="fa fa-bars"></i> </a> </li>
+                    </ul>
+                    <div id="menu" class="collapse">
+                      <ul class="nav navbar-nav">
+                        <li class=""> <a href="#main" class="smoothscroll">Главная</a> <span class="arrow"></span>
+                        </li>
+
+                        <li class=""> <a href="#blog" class="smoothscroll">О нас</a> <span class="arrow"></span>
+                        </li>
+                        <li class="active"> <a href="#find" class="smoothscroll">Прогноз</a> <span class="arrow"></span>
+                        </li>
+                        <li class="right"> <a href="#weather-forecast" class="smoothscroll">Статистика точности</a></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end menu-->
+
+      </div>
+      <!--end menu-->
+
+
+      <div class="clearfix"></div>
+
+      <!-- START REVOLUTION SLIDER 5.0 -->
+      <div class="slide-tmargin" id="main">
+        <div class="slidermaxwidth">
+          <div class="rev_slider_wrapper">
+            <!-- START REVOLUTION SLIDER 5.0 auto mode -->
+            <div id="rev_slider" class="rev_slider" data-version="5.0">
+              <ul>
+
+                <!-- SLIDE  -->
+                <li data-index="rs-1" data-transition="fade">
+
+                  <!-- MAIN IMAGE -->
+                  <img src="images/poster1.jpg" alt="" width="1920" height="1280">
+
+                  <!-- LAYER NR. 1 -->
+                  <div class="tp-caption raleway white uppercase text-white tp-resizeme"
+                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                    data-y="['top','top','top','top']" data-voffset="['270','240','240','200']"
+                    data-fontsize="['16','16','14','14']" data-lineheight="['70','70','70','50']" data-width="none"
+                    data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                    data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="2000"
+                    data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                    style="z-index: 7; white-space: nowrap;"> Получите наиболее точный прогноз на несколько дней вперёд</div>
+
+                  <!-- LAYER NR. 2 -->
+                  <div class="tp-caption montserrat fweight-6 text-white tp-resizeme"
+                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                    data-y="['top','top','top','top']" data-voffset="['320','100','100','110']"
+                    data-fontsize="['70','70','50','30']" data-lineheight="['100','100','100','50']" data-width="none"
+                    data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                    data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1000"
+                    data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                    style="z-index: 7; white-space: nowrap;">Прогноз с точностью  </div>
+
+                  <!-- LAYER NR. 3 -->
+                  <div class="tp-caption montserrat fweight-6 text-white tp-resizeme"
+                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                    data-y="['top','top','top','top']" data-voffset="['390','150','150','150']"
+                    data-fontsize="['70','60','50','30']" data-lineheight="['100','100','100','50']" data-width="none"
+                    data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                    data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1500"
+                    data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                    style="z-index: 7; white-space: nowrap;"> до дома </div>
+
+
+                  <!-- LAYER NR. 4 -->
+                  <div class="tp-caption sbut2 btn-round" data-x="['center','center','center','center']"
+                    data-hoffset="['0','0','0','0']" data-y="['top','top','top','top']"
+                    data-voffset="['550','350','370','300']" data-whitespace="nowrap" data-type="text"
+                    data-responsive_offset="on"
+                    data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];","speed":2000,"to":"o:1;","delay":3000,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;","ease":"Power2.easeInOut"}]'
+                    data-textAlign="['left','left','left','left']" data-paddingtop="[10,10,10,10]"
+                    data-paddingright="[20,20,20,20]" data-paddingbottom="[30,30,30,30]"
+                    data-paddingleft="[20,20,20,20]" style="z-index: 7;"><a href="#find" class="smoothscroll">Получить прогноз!</a> </div>
+
+
+                </li>
+
+
+                <!-- SLIDE  -->
+                <li data-index="rs-2" data-transition="slideleft">
+
+                  <!-- MAIN IMAGE -->
+                  <img src="images/poster3.jpg" alt="" width="1920" height="1280">
+
+                  <!-- LAYER NR. 1 -->
+                  <div class="tp-caption raleway white uppercase text-white tp-resizeme"
+                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                    data-y="['top','top','top','top']" data-voffset="['270','240','240','200']"
+                    data-fontsize="['16','16','14','14']" data-lineheight="['70','70','70','50']" data-width="none"
+                    data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                    data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="2000"
+                    data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                    style="z-index: 7; white-space: nowrap;">Cистема взвешенного прогнозирования погоды</div>
+
+                  <!-- LAYER NR. 2 -->
+                  <div class="tp-caption montserrat fweight-6 text-white tp-resizeme"
+                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                    data-y="['top','top','top','top']" data-voffset="['320','100','100','110']"
+                    data-fontsize="['70','70','50','30']" data-lineheight="['100','100','100','50']" data-width="none"
+                    data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                    data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1000"
+                    data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                    style="z-index: 7; white-space: nowrap;"> Точный </div>
+
+                  <!-- LAYER NR. 3 -->
+                  <div class="tp-caption montserrat fweight-6 text-white tp-resizeme"
+                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                    data-y="['top','top','top','top']" data-voffset="['390','150','150','150']"
+                    data-fontsize="['70','60','50','30']" data-lineheight="['100','100','100','50']" data-width="none"
+                    data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                    data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                    data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                    data-mask_in="x:0px;y:0px;" data-mask_out="x:inherit;y:inherit;" data-start="1500"
+                    data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                    style="z-index: 7; white-space: nowrap;"> прогноз </div>
+
+
+                  <!-- LAYER NR. 4 -->
+                  <div class="tp-caption sbut2 btn-round" data-x="['center','center','center','center']"
+                    data-hoffset="['0','0','0','0']" data-y="['top','top','top','top']"
+                    data-voffset="['550','350','370','300']" data-whitespace="nowrap" data-type="text"
+                    data-responsive_offset="on"
+                    data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];","speed":2000,"to":"o:1;","delay":3000,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;","ease":"Power2.easeInOut"}]'
+                    data-textAlign="['left','left','left','left']" data-paddingtop="[10,10,10,10]"
+                    data-paddingright="[20,20,20,20]" data-paddingbottom="[30,30,30,30]"
+                    data-paddingleft="[20,20,20,20]" style="z-index: 7;"><a href="#find" class="smoothscroll">Получить прогноз!</a> </div>
+
+
+                </li>
+
+
+
+              </ul>
+            </div>
+            <!-- END REVOLUTION SLIDER -->
+          </div>
+        </div>
+        <!-- END REVOLUTION SLIDER WRAPPER -->
+      </div>
+      <div class="clearfix"></div>
+      <!-- END OF SLIDER WRAPPER -->
+
+
+
+
+
+      <section class="sec-padding section-bgimg-9" id="blog">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 margin-bottom"> <br />
+              <div class="col-sm-12 nopadding">
+                <div class="sec-title-container less-padding-3 text-left">
+                  <h5 class="font-weight-4 less-mar-1 line-height-4 ce-title-top-text">Сервис позволяющий определить наиболее точную погоду</h5>
+                  <h2 class="font-weight-6 less-mar-1 line-height-5">Как это устроено ? </h2>
+                  <div class="ce-title-line align-left"></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <!--end title-->
+
+              <p>Благодаря своим данным, основанных на подсчёте точности погоды, мы с уверенностью можем
+                дать наиболее точный прогноз на следующие несколько дней. Для подсчёта точности был использован один из наиболее метео-нестабильных городов - Санкт-Петербург.
+              </p>
+
+              <p>*Согласно этому руководству, прогноз считается сбывшимся, если он отличается от фактический наблюдаемой температуры не больше, чем на 3 °С в любую сторону.
+                Если прогноз отличается от фактической погоды больше, чем на 3°, то такой прогноз считается несбывшимся (пункт 7.3.1.4 наставления).
+              </p>
+
+
+              <div class="clearfix"></div>
+              <br />
+              <br />
+            </div>
+            <!--end item-->
+
+            <div class="col-md-7 padding-left-4">
+              <div class="col-md-6">
+                <div class="ce-feature-box-32 text-left">
+                  <div class="iconbox-small round left dark icon"><span class="icon-profile-female"></span></div>
+                  <div class="clearfix"></div>
+                  <br />
+                  <h5 class="title font-weight-5">Записываем данные в базу</h5>
+                  <p> Производится запись в базу данных о погоде Санкт-Петербурга из нескольких источников.
+                      Данные берём на следующий день</p>
+                </div>
+              </div>
+              <!--end item-->
+
+              <div class="col-md-6">
+                <div class="ce-feature-box-32">
+                  <div class="iconbox-small round left dark icon"><span class="icon-bargraph"></span></div>
+                  <div class="clearfix"></div>
+                  <br />
+                  <h5 class="title font-weight-5">Ожидаем</h5>
+                  <p>Для подсчёта такого  рода данных ждём 2 дня. Данные об истории погоды берём от независимого источника. </p>
+                </div>
+              </div>
+              <!--end item-->
+
+              <div class="clearfix"></div>
+              <div class="col-divider-margin-4"></div>
+              <div class="col-md-6">
+                <div class="ce-feature-box-32 text-left">
+                  <div class="iconbox-small round left dark icon"><span class="icon-pencil"></span></div>
+                  <div class="clearfix"></div>
+                  <br />
+                  <h5 class="title font-weight-5">Проверяем достоверность</h5>
+                  <p>Для проверки достоверности данных используем «Наставления по краткосрочным прогнозам» от Гидрометцентра России*. </p>
+                </div>
+              </div>
+              <!--end item-->
+
+              <div class="col-md-6">
+                <div class="ce-feature-box-32">
+                  <div class="iconbox-small round left dark icon"><span class="icon-trophy"></span></div>
+                  <div class="clearfix"></div>
+                  <br />
+                  <h5 class="title font-weight-5">Получаем точность данных</h5>
+                  <p>На основе полученной точности мы производим расчёт точной погоды для всех остальных регионов </p>
+                </div>
+              </div>
+              <!--end item-->
+
+            </div>
+            <!--end item-->
+
+          </div>
+        </div>
+      </section>
+      <div class="clearfix"></div>
+      <!-- end section -->
+      <div id="find"></div>
+      </br>
+      </br>
+      </br>
+      </br>
+      </br>
+      </br>
+      <div class="parallax vertical-align" data-parallax-bg-image="images/poster0.jpg"
+        data-parallax-speed="0.9" data-parallax-direction="down">
+        <div class="parallax-overlay bg-opacity-7">
+          <div class="container sec-tpadding-2 sec-bpadding-2">
+            <div class="row">
+              <div class="ce-feature-box-35">
+                <div class="col-sm-12">
+                  <div class="sec-title-container less-padding-3 text-center">
+                    <h2 class="font-weight-6 less-mar-1 line-height-5 text-white"> Введите название населённого пункта </h2>
+                    <h6 class="text-white opacity-7">Точность погоды вплоть до дома</h6>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <!--end title-->
+
+                <div class="col-md-8 col-centered">
+                  <form action="/" method="post">
+                  <input name="city" class="newsletter" type="search" placeholder="Введите название например СПб">
+                  <input name="search" value="Показать прогноз" class="newsletter-btn" type="submit">
+                  </form>
+                </div>
+                <!--end item-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <!-- end section -->
+
+      <div class="sec-padding" id="weather-forecast">
+        <div class="col-md-3">
+          <div class="text-box white padding-4">
+            <h4><img src="images/gismeteo.png" alt=""/></h4>
+            <p th:text="'Точность данных Gismeteo  ' + ${avgTemp[0]}" />
+          </div>
+
+        </div>
+        <!--end item-->
+
+        <div class="col-md-3">
+          <div class="text-box white padding-4">
+            <h4><img src="images/accuweather.png" alt=""/></h4>
+            <p th:text="'Точность данных Accuweather  ' + ${avgTemp[1]}" />
+          </div>
+        </div>
+        <!--end item-->
+
+        <div class="col-md-3">
+          <div class="text-box white padding-4">
+            <h4><img src="images/yandex.png" alt=""/></h4>
+            <p th:text="'Точность данных Яндекс Погоды  ' + ${avgTemp[2]}" />
+          </div>
+        </div>
+        <!--end item-->
+
+        <div class="col-md-3">
+          <div class="text-box white padding-4">
+            <h4><img src="images/darksky.png" alt=""/></h4>
+            <p th:text="'Точность данных DarkSky  ' + ${avgTemp[3]}" />
+          </div>
+        </div>
+        <!--end item-->
+
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+
+
+
+    <div class="sec-padding section-fulldark">
+      <div class="container">
+        <div class="row">
+          <div class=" col-md-12 col-centered text-center"> <img src="images/logo/logo.png" alt=""/>
+            <div class="clearfix"></div>
+            <br/>
+            <br/>
+
+            <div class="divider-line solid light opacity-1"></div>
+            <ul class="footer-social-icons round">
+              <li><a class="twitter" href="https://twitter.com/so_mad_so_funny"><i class="fa fa-vk"></i></a></li>
+              <li><a class="active" href="https://youtu.be/0IFv4Pgt2n0"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="https://vk.com/resfakchion"><i class="fa fa-facebook"></i></a></li>
+            </ul>
+            <div class="col-md-12">
+              <p class="text-gray">Copyright © 2020 <br/>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- end section --> 
+
+    <a href="#" class="scrollup"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- end scroll to top of the page-->
+
+  </div>
+  <!--end site wrapper-->
+  </div>
+  <!--end wrapper boxed-->
+
+  <!-- Scripts -->
+  <script src="js/jquery/jquery.js"></script>
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+
+  <script src="js/less/less.min.js" data-env="development"></script>
+
+  <!-- Scripts END -->
+
+  <!-- Template scripts -->
+  <script src="js/megamenu/js/main.js"></script>
+  <script type="text/javascript" src="js/ytplayer/jquery.mb.YTPlayer.js"></script>
+  <script type="text/javascript" src="js/ytplayer/elementvideo-custom.js"></script>
+  <script type="text/javascript" src="js/ytplayer/play-pause-btn.js"></script>
+  <!-- REVOLUTION JS FILES -->
+  <script type="text/javascript" src="js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
+  <script type="text/javascript" src="js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
+  <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  
+(Load Extensions only on Local File Systems ! 
+The following part can be removed on Server for On Demand Loading) -->
+  <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.actions.min.js"></script>
+  <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.carousel.min.js"></script>
+  <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.kenburn.min.js"></script>
+  <script type="text/javascript"
+    src="js/revolution-slider/js/extensions/revolution.extension.layeranimation.min.js"></script>
+  <script type="text/javascript"
+    src="js/revolution-slider/js/extensions/revolution.extension.migration.min.js"></script>
+  <script type="text/javascript"
+    src="js/revolution-slider/js/extensions/revolution.extension.navigation.min.js"></script>
+  <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.parallax.min.js"></script>
+  <script type="text/javascript"
+    src="js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js"></script>
+  <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.video.min.js"></script>
+  <script type="text/javascript">
+    var tpj = jQuery;
+    var revapi4;
+    tpj(document).ready(function () {
+      if (tpj("#rev_slider").revolution == undefined) {
+        revslider_showDoubleJqueryError("#rev_slider");
+      } else {
+        revapi4 = tpj("#rev_slider").show().revolution({
+          sliderType: "standard",
+          jsFileLocation: "js/revolution-slider/js/",
+          sliderLayout: "auto",
+          dottedOverlay: "none",
+          delay: 9000,
+          navigation: {
+            keyboardNavigation: "off",
+            keyboard_direction: "horizontal",
+            mouseScrollNavigation: "off",
+            onHoverStop: "off",
+            arrows: {
+              style: "uranus",
+              enable: true,
+              hide_onmobile: false,
+              hide_under: 100,
+              hide_onleave: true,
+              hide_delay: 200,
+              hide_delay_mobile: 1200,
+              tmp: '',
+              left: {
+                h_align: "left",
+                v_align: "center",
+                h_offset: 80,
+                v_offset: 0
+              },
+              right: {
+                h_align: "right",
+                v_align: "center",
+                h_offset: 80,
+                v_offset: 0
+              }
+            }
+            ,
+            touch: {
+              touchenabled: "on",
+              swipe_threshold: 75,
+              swipe_min_touches: 1,
+              swipe_direction: "horizontal",
+              drag_block_vertical: false
+            }
+            ,
+
+
+
+          },
+          viewPort: {
+            enable: true,
+            outof: "pause",
+            visible_area: "80%"
+          },
+
+          responsiveLevels: [1240, 1024, 778, 480],
+          gridwidth: [1240, 1024, 778, 480],
+          gridheight: [870, 730, 600, 420],
+          lazyType: "smart",
+          parallax: {
+            type: "mouse",
+            origo: "slidercenter",
+            speed: 2000,
+            levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50],
+          },
+          shadow: 0,
+          spinner: "off",
+          stopLoop: "off",
+          stopAfterLoops: -1,
+          stopAtSlide: -1,
+          shuffle: "off",
+          autoHeight: "off",
+          hideThumbsOnMobile: "off",
+          hideSliderAtLimit: 0,
+          hideCaptionAtLimit: 0,
+          hideAllCaptionAtLilmit: 0,
+          disableProgressBar: "on",
+          debugMode: false,
+          fallbacks: {
+            simplifyAll: "off",
+            nextSlideOnWindowFocus: "off",
+            disableFocusListener: false,
+          }
+        });
+      }
+    });	/*ready*/
+  </script>
+  <script type="text/javascript">
+    var tpj = jQuery;
+
+    var revapi280;
+    tpj(document).ready(function () {
+      if (tpj("#rev_slider_280_1").revolution == undefined) {
+        revslider_showDoubleJqueryError("#rev_slider_280_1");
+      } else {
+        revapi280 = tpj("#rev_slider_280_1").show().revolution({
+          sliderType: "hero",
+          jsFileLocation: "../../revolution/js/",
+          sliderLayout: "auto",
+          dottedOverlay: "none",
+          delay: 9000,
+          navigation: {},
+          responsiveLevels: [1240, 1024, 778, 480],
+          visibilityLevels: [1240, 1024, 778, 480],
+          gridwidth: [1000, 1024, 778, 480],
+          gridheight: [600, 520, 420, 420],
+          lazyType: "none",
+          parallax: {
+            type: "scroll",
+            origo: "slidercenter",
+            speed: 1000,
+            levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 51, 55],
+            type: "scroll",
+          },
+          shadow: 0,
+          spinner: "spinner2",
+          autoHeight: "off",
+          fullScreenAutoWidth: "off",
+          fullScreenAlignForce: "off",
+          fullScreenOffsetContainer: "",
+          fullScreenOffset: "60",
+          disableProgressBar: "on",
+          hideThumbsOnMobile: "off",
+          hideSliderAtLimit: 0,
+          hideCaptionAtLimit: 0,
+          hideAllCaptionAtLilmit: 0,
+          debugMode: false,
+          fallbacks: {
+            simplifyAll: "off",
+            disableFocusListener: false,
+          }
+        });
+      }
+    }); /*ready*/
+  </script>
+  <script>
+    $(window).load(function () {
+      setTimeout(function () {
+
+        $('.loader-live').fadeOut();
+      }, 1000);
+    })
+
+  </script>
+  <script>
+    /*----------------------------------------------------*/
+    /* Smooth Scrolling
+    ------------------------------------------------------ */
+    $('.smoothscroll').on('click', function (e) {
+
+      e.preventDefault();
+
+      var target = this.hash,
+        $target = $(target);
+
+      $('html, body').stop().animate({
+        'scrollTop': $target.offset().top
+      }, 800, 'swing', function () {
+        window.location.hash = target;
+      });
+
+    });
+
+  </script>
+  <script src="js/parallax/parallax-background.min.js"></script>
+  <script>
+    (function ($) {
+      $('.parallax').parallaxBackground();
+    })(jQuery);
+  </script>
+  <script src="js/tabs/js/responsive-tabs.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/cubeportfolio/jquery.cubeportfolio.min.js"></script>
+  <script type="text/javascript" src="js/cubeportfolio/main-mosaic3-cols3.js"></script>
+  <script src="js/owl-carousel/owl.carousel.js"></script>
+  <script src="js/owl-carousel/custom.js"></script>
+  <script src="js/owl-carousel/owl.carousel.js"></script>
+  <script src="js/accordion/js/smk-accordion.js"></script>
+  <script src="js/accordion/js/custom.js"></script>
+  <script src="js/progress-circle/raphael-min.js"></script>
+  <script src="js/progress-circle/custom.js"></script>
+  <script src="js/progress-circle/jQuery.circleProgressBar.js"></script>
+  <script src="js/functions/functions.js"></script>
 </body>
+
 </html>
