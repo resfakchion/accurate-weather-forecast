@@ -8,11 +8,11 @@ public class PostgreSQL {
     }
 
 
-    public PostgreSQL(String weather, int[] temps) {
-        System.out.println(addWeather(weather, temps));
+    public PostgreSQL(SmallForecast forecastOperator) {
+        System.out.println(addWeather(forecastOperator));
     }
 
-    public static String addWeather(String weather, int[] temps) {
+    public static String addWeather(SmallForecast forecastOperator) {
         Connection c;
         Statement stmt;
 
@@ -20,29 +20,29 @@ public class PostgreSQL {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://ec2-176-34-97-213.eu-west-1.compute.amazonaws.com:5432/de0fq49vrl5liu", "ygcdcsmuyqjeju", "8401ebcb2b17ba4a441afc91668cf11d3862733af0e27e0e07510005ba66f669");
+                    .getConnection("jdbc:postgresql://ec2-46-137-124-19.eu-west-1.compute.amazonaws.com:5432/demjopbme5bn2i", "cldwzutmpwcybh", "ffbe97c6844752d8b10a7cbe6fbe6e33e44f5487f0e2a88ffff4a48e52203d62");
             c.setAutoCommit(false);
             String sql;
 
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("Select day FROM " + weather + " where day = current_date + 1;");
+            ResultSet rs = stmt.executeQuery("Select day FROM " + forecastOperator.companyName + " where day = current_date + 1;");
             if (rs.next()) {
-                sql = "DELETE from " + weather + " where day = current_date + 1;";
+                sql = "DELETE from " + forecastOperator.companyName + " where day = current_date + 1;";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO " + weather + " (day,TempMin,TempMax) VALUES (current_date + 1 , + " + temps[1] + " , " + temps[0] + " )";
+                sql = "INSERT INTO " + forecastOperator.companyName + " (day,TempMin,TempMax) VALUES (current_date + 1 , + " + forecastOperator.min + " , " + forecastOperator.max + " )";
                 stmt.executeUpdate(sql);
-                System.out.println("Данные прогноза " + weather + " были обновлены");
+                System.out.println("Данные прогноза " + forecastOperator.companyName + " были обновлены");
             } else {
-                sql = "INSERT INTO " + weather + " (day,TempMin,TempMax) VALUES (current_date + 1 , + " + temps[1] + " , " + temps[0] + " )";
+                sql = "INSERT INTO " + forecastOperator.companyName + " (day,TempMin,TempMax) VALUES (current_date + 1 , + " + forecastOperator.min + " , " + forecastOperator.max + " )";
                 stmt.executeUpdate(sql);
-                System.out.println("Данные прогноза " + weather + " внесены");
+                System.out.println("Данные прогноза " + forecastOperator.companyName + " внесены");
             }
             rs.close();
             stmt.close();
             c.commit();
 
             stmt = c.createStatement();
-            ResultSet resultSet = stmt.executeQuery("Select tempmin , tempmax FROM " + weather + " where day = current_date - 1;");
+            ResultSet resultSet = stmt.executeQuery("Select tempmin , tempmax FROM " + forecastOperator.companyName + " where day = current_date - 1;");
             if (resultSet.next()) {
                 int forecastTempMin = resultSet.getInt(1);
                 int forecastTempMax = resultSet.getInt(2);
@@ -51,10 +51,10 @@ public class PostgreSQL {
                 int accuracy = 0;
                 if (Math.abs(forecastTempMax - historyTemp[0]) <= 2 && Math.abs(forecastTempMin - historyTemp[1]) <= 2)
                     accuracy = 100;
-                sql = "UPDATE " + weather + " set TempRealMax  = " + historyTemp[0] + ", TempRealMin =  " + historyTemp[1] + ", accuracy =  " + accuracy + " where day = current_date - 1;";
+                sql = "UPDATE " + forecastOperator.companyName + " set TempRealMax  = " + historyTemp[0] + ", TempRealMin =  " + historyTemp[1] + ", accuracy =  " + accuracy + " where day = current_date - 1;";
                 stmt.executeUpdate(sql);
-                System.out.println("Внесены данные о реальной погоде " + weather);
-            } else System.out.println("Данные о реальной погоде " + weather + " не были внесены");
+                System.out.println("Внесены данные о реальной погоде " + forecastOperator.companyName);
+            } else System.out.println("Данные о реальной погоде " + forecastOperator.companyName + " не были внесены");
             rs.close();
             stmt.close();
             c.commit();
@@ -65,7 +65,7 @@ public class PostgreSQL {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return "-- " + weather + " - Done!";
+        return "-- " + forecastOperator.companyName + " - Done!";
 
     }
 
@@ -74,7 +74,7 @@ public class PostgreSQL {
         Statement stmt;
         Class.forName("org.postgresql.Driver");
         c = DriverManager
-                .getConnection("jdbc:postgresql://ec2-176-34-97-213.eu-west-1.compute.amazonaws.com:5432/de0fq49vrl5liu", "ygcdcsmuyqjeju", "8401ebcb2b17ba4a441afc91668cf11d3862733af0e27e0e07510005ba66f669");
+                .getConnection("jdbc:postgresql://ec2-46-137-124-19.eu-west-1.compute.amazonaws.com:5432/demjopbme5bn2i", "cldwzutmpwcybh", "ffbe97c6844752d8b10a7cbe6fbe6e33e44f5487f0e2a88ffff4a48e52203d62");
         c.setAutoCommit(false);
         String sql;
         stmt = c.createStatement();
@@ -113,7 +113,7 @@ public class PostgreSQL {
         }
         try {
             c = DriverManager
-                    .getConnection("jdbc:postgresql://ec2-176-34-97-213.eu-west-1.compute.amazonaws.com:5432/de0fq49vrl5liu", "ygcdcsmuyqjeju", "8401ebcb2b17ba4a441afc91668cf11d3862733af0e27e0e07510005ba66f669");
+                    .getConnection("jdbc:postgresql://ec2-46-137-124-19.eu-west-1.compute.amazonaws.com:5432/demjopbme5bn2i", "cldwzutmpwcybh", "ffbe97c6844752d8b10a7cbe6fbe6e33e44f5487f0e2a88ffff4a48e52203d62");
             c.setAutoCommit(false);
             String sql;
             try {

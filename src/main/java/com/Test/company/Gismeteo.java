@@ -9,20 +9,14 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class Gismeteo {
-    public static void main(String[] args) {
-        new Gismeteo();
-    }
+public class Gismeteo extends ForecastOperator {
+
 
     String finalUrl = "https://api.gismeteo.net/v2/weather/forecast/aggregate/?latitude=59.939095&longitude=30.315868&days=3";
 
-    Gismeteo() {
-
-    }
 
 
-
-    public int[] coordinates() {
+    public void coordinates() {
         int[] temps = new int[2];
 
         try {
@@ -37,28 +31,14 @@ public class Gismeteo {
                 temps[0] = (int) Math.round((jarr.get(1).getAsJsonObject().get("temperature").getAsJsonObject().get("air").getAsJsonObject().get("max").getAsJsonObject().get("C").getAsDouble()));
                 temps[1] = (int) Math.round((jarr.get(1).getAsJsonObject().get("temperature").getAsJsonObject().get("air").getAsJsonObject().get("min").getAsJsonObject().get("C").getAsDouble()));
 
-                return temps;
-            } else {
-                temps[0] = -1000;// ошибка
-                temps[1] = 1000;
-                return temps;
+                forecast = new SmallForecast("gismeteo",temps[1],temps[0],true);
             }
+            else forecast = new SmallForecast("yandexweather",temps[1],temps[0],false);
+        } catch (IOException ignored) {
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            temps[0] = -1000;// ошибка
-            temps[1] = 1000;
-            return temps;
         }
     }
 
-    public void upload() {
-        int[] result = coordinates();
-        if (result[0] != -1000)
-            PostgreSQL.addWeather("gismeteo", result);
-        else
-            System.out.println("Не могу подключиться к Gismeteo");
-    }
 
     public int[][] takeThreeDays(String[] result) {
         finalUrl = "https://api.gismeteo.net/v2/weather/forecast/aggregate/?latitude=" + result[3] + "&longitude=" + result[2] + "&days=3";
@@ -72,7 +52,7 @@ public class Gismeteo {
             if (connection.getResponseCode() == 200) {
                 JsonObject jobj = new JsonParser().parse(
                         new InputStreamReader(connection.getInputStream())).getAsJsonObject();
-                JsonArray jarr = (JsonArray) jobj.get("response").getAsJsonArray();
+                JsonArray jarr =  jobj.get("response").getAsJsonArray();
                 for (int i = 0; i < 3; i++) {
                     temps[i][0] = (int) Math.round((jarr.get(i).getAsJsonObject().get("temperature").getAsJsonObject().get("air").getAsJsonObject().get("max").getAsJsonObject().get("C").getAsDouble()));
                     temps[i][1] = (int) Math.round((jarr.get(i).getAsJsonObject().get("temperature").getAsJsonObject().get("air").getAsJsonObject().get("min").getAsJsonObject().get("C").getAsDouble()));

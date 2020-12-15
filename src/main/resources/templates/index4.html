@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title th:text="'Погода в ' + ${city}"></title>
+  <title>Blak | Multi-Purpose HTML5 Template </title>
   <meta name="keywords" content="" />
   <meta name="description" content="">
   <meta name="author" content="">
@@ -78,7 +78,7 @@
           <div class="container">
             <div class="mod-menu">
               <div class="row">
-                <div class="col-sm-2"> <a href="/" title="" class="logo mar-4"> <img
+                <div class="col-sm-2"> <a href="index.html" title="" class="logo mar-4"> <img
                       src="images/logo/logoGZ.png" alt=""> </a> </div>
                 <div class="col-sm-10">
                   <div class="main-nav">
@@ -89,7 +89,14 @@
                     </ul>
                     <div id="menu" class="collapse">
                       <ul class="nav navbar-nav">
-                        <li class=""> <a href="/" class="">Вернутся на главную</a> <span class="arrow"></span>
+                        <li class=""> <a href="#main" class="smoothscroll">Главная</a> <span class="arrow"></span>
+                        </li>
+
+                        <li class=""> <a href="#blog" class="smoothscroll">О нас</a> <span class="arrow"></span>
+                        </li>
+                        <li class="active"> <a href="#find" class="smoothscroll">Поиск города</a> <span class="arrow"></span>
+                        </li>
+                        <li class="right"> <a href="#weather-forecast" class="smoothscroll">Прогноз</a></span>
                         </li>
                       </ul>
                     </div>
@@ -111,51 +118,38 @@
         
        <div class="col-md-4 col-sm-6">
                 <div class="text-box white padding-5 text-center"> 
-                <div class="iconbox-medium round outline-gray-2 center"><img  th:src="@{'images/icons/' + (${description.get(0).getIcon()}) + '.png'}" alt=""/></div>
+                <div class="iconbox-medium round outline-gray-2 center"><span class="icon-bike"></span></div>
                   <br/>
-                  <h4 class="uppercase" th:text="${days[0]}"> </h4>
-                  <p th:text="'Максимальная температура ' + ${threeDaysTemp[0][0]} "/>
-                  <p th:text="'Минимальная температура '  + ${threeDaysTemp[0][1]} " />
-                  <p th:text="${description.get(0).getDescription()}" />
-                  <p th:text="'Давление ' + ${description.get(0).getPressure()} + ' мм.рт.ст'" />
-                  <p th:text="'Влажность ' + ${description.get(0).getHumidity()} + '%'" />
-
+                  <h4 class="uppercase">Graphic Design</h4>
+                  <p>Lorem ipsum dolor consectetuer sit amet sit et justo consectetuer adipiscing elit.</p>
                   <br/>
                   <br/>
-                   </div>
+                  <a class="btn btn-border dark btn-small border-1x uppercase" href="#">Read more</a> </div>
               </div>
               <!--end item-->
               
                       <div class="col-md-4 col-sm-6">
                 <div class="text-box white padding-5 text-center"> 
-                <div class="iconbox-medium round outline-gray-2 center"><img  th:src="@{'images/icons/' + (${description.get(1).getIcon()}) + '.png'}" alt=""/></div>
+                <div class="iconbox-medium round outline-gray-2 center"><span class="icon-lightbulb"></span></div>
                   <br/>
-                  <h4 class="uppercase" th:text="${days[1]}"> </h4>
-                  <p th:text="'Максимальная температура ' + ${threeDaysTemp[1][0]} "/>
-                  <p th:text="'Минимальная температура '  + ${threeDaysTemp[1][1]} " />
-                  <p th:text="${description.get(1).getDescription()}" />
-                  <p th:text="'Давление ' + ${description.get(1).getPressure()} + ' мм.рт.ст'" />
-                  <p th:text="'Влажность ' + ${description.get(1).getHumidity()} + '%'" />
+                  <h4 class="uppercase">Graphic Design</h4>
+                  <p>Lorem ipsum dolor consectetuer sit amet sit et justo consectetuer adipiscing elit.</p>
                   <br/>
                   <br/>
-                </div>
+                  <a class="btn btn-border dark btn-small border-1x uppercase" href="#">Read more</a> </div>
               </div>
               <!--end item-->
               
               
                       <div class="col-md-4 col-sm-6">
                 <div class="text-box white padding-5 text-center"> 
-                <div class="iconbox-medium round outline-gray-2 center"><img  th:src="@{'images/icons/' + (${description.get(2).getIcon()}) + '.png'}" alt=""/></div>
+                <div class="iconbox-medium round outline-gray-2 center"><span class="icon-pencil"></span></div>
                   <br/>
-                  <h4 class="uppercase" th:text="${days[2]}"> </h4>
-                  <p th:text="'Максимальная температура ' + ${threeDaysTemp[2][0]} "/>
-                  <p th:text="'Минимальная температура '  + ${threeDaysTemp[2][1]} " />
-                  <p th:text="${description.get(2).getDescription()}" />
-                  <p th:text="'Давление ' + ${description.get(2).getPressure()} + ' мм.рт.ст'" />
-                  <p th:text="'Влажность ' + ${description.get(2).getHumidity()} + '%'" />
+                  <h4 class="uppercase">Graphic Design</h4>
+                  <p>Lorem ipsum dolor consectetuer sit amet sit et justo consectetuer adipiscing elit.</p>
                   <br/>
                   <br/>
-                  </div>
+                  <a class="btn btn-border dark btn-small border-1x uppercase" href="#">Read more</a></div>
               </div>
               <!--end item-->
         </div>
@@ -165,27 +159,42 @@
         <!-- end section -->
 
 
-      <div class="sec-padding section-fulldark">
-        <div class="container">
-          <div class="row">
-            <div class=" col-md-12 col-centered text-center"> <img src="images/logo/logoGZ-black.png" alt=""/>
-              <div class="clearfix"></div>
-              <div class="clearfix"></div>
-
-              <div class="divider-line solid light opacity-1"></div>
-              <ul class="footer-social-icons round">
-                <li><a class="twitter" href="https://twitter.com/so_mad_so_funny"><i class="fa fa-vk"></i></a></li>
-                <li><a class="active" href="https://youtu.be/0IFv4Pgt2n0"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="https://vk.com/resfakchion"><i class="fa fa-facebook"></i></a></li>
-              </ul>
-              <div class="col-md-12">
-                <p class="text-gray">Copyright © 2020 <br/>
-                </p>
-              </div>
+    <div class="sec-padding section-fulldark">
+      <div class="container">
+        <div class="row">
+          <div class=" col-md-12 col-centered text-center"> <img src="images/logo/logo.png" alt=""/>
+            <div class="clearfix"></div>
+            <br/>
+            <br/>
+            <h4 class="text-white">Address</h4>
+            <h6 class="text-light opacity-6">1234 new lorem Rd.<br/>
+              ipsum city, cA 012345<br/>
+              (0123) 123-456-789</h6>
+            <div class="clearfix"></div>
+            <ul class="footer-quick-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Gallery</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="divider-line solid light opacity-1"></div>
+            <ul class="footer-social-icons round">
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="active" href="#"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            </ul>
+            <div class="col-md-12">
+              <p class="text-gray">Copyright © 2017 <br/>
+                Design & Developed by Codelayers</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <div class="clearfix"></div>
     <!-- end section --> 
 

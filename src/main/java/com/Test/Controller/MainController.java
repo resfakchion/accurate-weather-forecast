@@ -1,11 +1,9 @@
 package com.Test.Controller;
 
-import com.Test.Service.FileStatService;
 import com.Test.company.Forecast;
 import com.Test.company.PostgreSQL;
 import com.Test.company.TakeWeather;
 import org.springframework.ui.Model;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +15,7 @@ import java.util.Calendar;
 @Controller
 public class MainController {
 
-    @Autowired
-    FileStatService fileStatService;
+
 
     @GetMapping("/")
     public String main(Model model) throws IOException {

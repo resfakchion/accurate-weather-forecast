@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ошибка </title>
+<title>Blak | Multi-Purpose HTML5 Template </title>
 <meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="">
@@ -65,7 +65,7 @@
         <div class="container">
           <div class="mod-menu">
             <div class="row">
-              <div class="col-sm-2"> <a href="/" title="" class="logo mar-4"> <img
+              <div class="col-sm-2"> <a href="index.html" title="" class="logo mar-4"> <img
                     src="images/logo/logoGZ.png" alt=""> </a> </div>
               <div class="col-sm-10">
                 <div class="main-nav">
@@ -76,7 +76,14 @@
                   </ul>
                   <div id="menu" class="collapse">
                     <ul class="nav navbar-nav">
-                      <li class=""> <a href="/" class="">Вернутся на главную</a> <span class="arrow"></span>
+                      <li class=""> <a href="#main" class="smoothscroll">Главная</a> <span class="arrow"></span>
+                      </li>
+
+                      <li class=""> <a href="#blog" class="smoothscroll">О нас</a> <span class="arrow"></span>
+                      </li>
+                      <li class=""> <a href="#find" class="smoothscroll">Поиск города</a> <span class="arrow"></span>
+                      </li>
+                      <li class="right"> <a href="#weather-forecast" class="smoothscroll">Прогноз</a></span>
                       </li>
                     </ul>
                   </div>
@@ -98,15 +105,15 @@
       
 		<div class="col-md-8 col-sm-12 col-xs-12 text-left">
         <div class="error_holder two bmargin">
-        <h2 class="uppercase">Упс...Ошибка. Город не найден.</h2>
-        <p>Извините мы не нашли город по вашему запросу. Попробуйте написать город латиницей.</p>
+        <h2 class="uppercase">Oops... Page Not Found!</h2>
+        <p>Sorry the Page Could not be Found here. Try using the button below to go to main page of the site</p>
         <br/>
         <br/>
         <br/>
         <div class="error-search-box">
-          <form action="/" method="post">
-            <input name="city" class="newsletter email_input" type="search" placeholder="Введите название города">
-            <input name="search" value="Показать прогноз" class="newsletter-btn input_submit" type="submit">
+          <form method="get" action="index.html">
+            <input class="email_input" name="samplees" id="samplees" value="E-mail Address" onFocus="if(this.value == 'E-mail Address') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'E-mail Address';}" type="text">
+            <input name="" value="Search" class="input_submit" type="submit">
           </form>
         </div>
       </div>
@@ -125,30 +132,45 @@
   </section>
   <!--end item -->
   <div class="clearfix"></div>
+     
+    
 
-
-
-    <div class="sec-padding section-fulldark">
-      <div class="container">
-        <div class="row">
-          <div class=" col-md-12 col-centered text-center"> <img src="images/logo/logoGZ-black.png" alt=""/>
-            <div class="clearfix"></div>
-            <div class="clearfix"></div>
-
-            <div class="divider-line solid light opacity-1"></div>
-            <ul class="footer-social-icons round">
-              <li><a class="twitter" href="https://twitter.com/so_mad_so_funny"><i class="fa fa-vk"></i></a></li>
-              <li><a class="active" href="https://youtu.be/0IFv4Pgt2n0"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="https://vk.com/resfakchion"><i class="fa fa-facebook"></i></a></li>
-            </ul>
-            <div class="col-md-12">
-              <p class="text-gray">Copyright © 2020 <br/>
-              </p>
-            </div>
+  <div class="sec-padding section-fulldark">
+    <div class="container">
+      <div class="row">
+        <div class=" col-md-12 col-centered text-center"> <img src="images/logo/logo.png" alt=""/>
+          <div class="clearfix"></div>
+          <br/>
+          <br/>
+          <h4 class="text-white">Address</h4>
+          <h6 class="text-light opacity-6">1234 new lorem Rd.<br/>
+            ipsum city, cA 012345<br/>
+            (0123) 123-456-789</h6>
+          <div class="clearfix"></div>
+          <ul class="footer-quick-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <div class="divider-line solid light opacity-1"></div>
+          <ul class="footer-social-icons round">
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="active" href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+          </ul>
+          <div class="col-md-12">
+            <p class="text-gray">Copyright © 2017 <br/>
+              Design & Developed by Codelayers</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
   <div class="clearfix"></div>
   <!-- end section --> 
 

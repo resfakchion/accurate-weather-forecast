@@ -18,7 +18,7 @@ public class Upload {
       public static class DarkSkyThread extends Thread {
         @Override
         public void run() {
-            DarkSkyWeather darkSkyWeather =  new DarkSkyWeather();
+            DarkSkyWeather darkSkyWeather = new DarkSkyWeather();
             darkSkyWeather.upload();
             System.out.println("DarkSky - "  + (System.currentTimeMillis() - time));
         }
